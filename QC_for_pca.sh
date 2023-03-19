@@ -24,7 +24,7 @@ hwe=0.0000001 #Hardy-Weinberg
 min=0.2 #Cryptic relatedness
 rel_cutoff=0.025
 rootname=/mnt/Guanina/cvan/data/Keloids_F2/WES/Plink/UCHC_Freeze_Two.GL.splitmulti
-set_of_high_ld_regions=${directory_for_hild_prunning}/hild_set.set
+set_of_high_ld_regions=${directory_for_hild_prunning}/hild_set
 reported_high_ld_zones_file=/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230227_PCA_results_and_extrafiles/high_ld_regions.txt
 first_output_file_removed_high_ld_regions=${directory_for_hild_prunning}/${todays_date}_removed_high_ld_regions
 
