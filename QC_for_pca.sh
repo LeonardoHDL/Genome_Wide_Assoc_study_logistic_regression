@@ -73,4 +73,3 @@ module unload plink /1.9
 echo "results of QC saved in: ${output_file_for_QC}"
 
 
-Remote working directory: /mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/20230319_QC_for_assoc_study
