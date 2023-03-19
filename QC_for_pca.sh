@@ -31,8 +31,8 @@ first_output_file_removed_high_ld_regions=${directory_for_hild_prunning}/${today
 #we must first remove the high linkage disequilibrium regions such as those that contains MHC complexes
 module load plink/1.9
 
-plink --bfile ${rootname} --make-set ${reported_high_ld_zones_file} --write-set --out ${set_of_high_ld_regions}
-plink --bfile ${rootname} --exclude ${set_of_high_ld_regions} --recode --out ${first_output_file_removed_high_ld_regions}
+plink --bfile ${rootname} --make-set ${reported_high_ld_zones_file} --autosome --write-set  --keep-allele-order --out ${set_of_high_ld_regions}
+plink --bfile ${rootname} --exclude ${set_of_high_ld_regions}.set --autosome --keep-allele-order --make-bed --out ${first_output_file_removed_high_ld_regions}
 
 module unload plink/1.9
 
@@ -44,24 +44,26 @@ module unload plink/1.9
 #in order to maintain an organizd working space we well create a new directory to contain QC output files
 mkdir ${base_path}${todays_date}_QC_for_assoc_study
 input_for_QC=${first_output_file_removed_high_ld_regions}
-output_file_for_QC= ${base_path}_QC_for_assoc_study/${todays_date}_output_from_QC
+output_file_for_QC= ${base_path}${todays_date}_QC_for_assoc_study/${todays_date}_output_from_QC
 
 
 
 echo "already removed high linkage disequilibrium regions, results written in: ${first_output_file_removed_high_ld_regions}"
 echo "--Running Plink for Quality Control over ${input_for_QC}"
+
+echo "results of QC will bre written on ${output_file_for_QC}"
 echo "--Missingness per SNPs set on ${geno}"
 echo "--Missingness per individual set on ${mind}"
 echo "--Minor allele frequency set on ${maf}"
 echo "--Hardy-Weinberg threshold set on ${hwe}"
 echo "--relationship threshold set on ${rel-cutoff}"
-echo "setting criptic relatedness treshold on ${min}"
-echo "keeping allele order"
+echo "--setting criptic relatedness treshold on ${min}"
+echo "--keeping allele order"
 
 
 module load plink/1.9
 
-plink --bfile ${input_for_QC} --geno ${geno} --mind ${mind} --genome --min ${min} --rel-cutoff ${rel_cutoff} --maf ${maf} --hwe ${hwe} --keep-allele-order --make-bed --out ${output_file_for_QC}
+plink --bfile ${input_for_QC} --geno ${geno} --mind ${mind} --genome --min ${min} --autosome --rel-cutoff ${rel_cutoff} --maf ${maf} --hwe ${hwe} --keep-allele-order --make-bed --out ${output_file_for_QC}
 
 module unload plink /1.9
 
@@ -69,3 +71,6 @@ module unload plink /1.9
 
 
 echo "results of QC saved in: ${output_file_for_QC}"
+
+
+Remote working directory: /mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/20230319_QC_for_assoc_study
