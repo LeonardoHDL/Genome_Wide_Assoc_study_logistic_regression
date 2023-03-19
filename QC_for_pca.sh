@@ -44,7 +44,7 @@ module unload plink/1.9
 #in order to maintain an organizd working space we well create a new directory to contain QC output files
 mkdir ${base_path}${todays_date}_QC_for_assoc_study
 input_for_QC=${first_output_file_removed_high_ld_regions}
-output_file_for_QC= ${base_path}${todays_date}_QC_for_assoc_study/${todays_date}_output_from_QC
+output_file_for_QC=${base_path}${todays_date}_QC_for_assoc_study/${todays_date}_output_from_QC
 
 
 
