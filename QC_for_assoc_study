@@ -72,4 +72,26 @@ module unload plink /1.9
 
 echo "results of QC saved in: ${output_file_for_QC}"
 
+#what's next is to obtain pca values to be used as covars and also to graph pca.
+#in order to do this we must first get pca values from plink software 
+number_of_PCs=10
+
+#we will also create a new directory to store PCA values
+mkdir ${base_path}${todays_date}_PCA
+input_files_for_PCA=${output_file_for_QC}
+
+output_values_of_PCA=${base_path}${todays_date}_QC_for_assoc_study/${todays_date}_PCA_after_QC
+
+
+echo 'Now performing PCA in the files that we obtained from step 2: general QC'
+echo "we will obtain ${number_of_PCs}" PCs 
+module load plink/1.9
+
+plink --bfile ${output_file_for_QC} --pca ${number_of_PCs}  ['header'] --out ${output_values_of_PCA}
+
+module unload plink/1.9
+
+#Nos that we have obtained our values for PCA we will graph them to check for
+#abnormalities or unexpected data organization
+#in order to do this we must have an external file called:
 
