@@ -15,7 +15,15 @@ new_col_names=['UCHC_1-888-001_1-888-001', 'IID', 'PC1', 'PC2', 'PC3','PC4', 'PC
 eigenvecs=pd.read_table(table, names=new_col_names, sep=' ')
 #below command is necessary to create a new ID column that mathces the one in clinical file
 eigenvecs['IDnumber']= eigenvecs['UCHC_1-888-001_1-888-001'].str.split("_", expand = True)[1]
-eigenvecs_final=eigenvecs.drop(['UCHC_1-888-001_1-888-001', 'IID'], axis=1)
+#Below command is necessary to save a covariate file (which only takes into acount PCs)
+new_col_names=['FID', 'IID', 'PC1', 'PC2', 'PC3','PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10']
+eigenvecs.columns=['FID', 'IID', 'PC1', 'PC2', 'PC3','PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10','IDnumber']
+#in order to place the imgs and covariates/phenotype files in the right folder we will need to add a fourth sys.arg
+folder_where_imgs_will_be_saved=sys.argv[4]
+print(f'directory where covar and pheno file will be allocated: {folder_where_imgs_will_be_saved}')
+#we then save the table in a txt format
+eigenvecs.to_csv(f'{folder_where_imgs_will_be_saved}covarfile.txt', index=False, sep=' ')
+
 
 
 #now that we already read our eigenvecs file, we now read the clinical file to identify the 
@@ -28,7 +36,11 @@ clinical_col_names=['Barcode', 'Plate', 'Position', 'IDnumber', 'Keloids', 'Sex'
 clinical=pd.read_csv(table2,names=clinical_col_names)
 
 #we now proceed to merge both files
-finaldf=pd.merge(eigenvecs_final,clinical, how='inner')
+finaldf=pd.merge(eigenvecs,clinical, how='inner')
+pheno_file=finaldf.loc[:,['FID', 'IID', 'Keloids']]
+pheno_file['Keloids']=pheno_file['Keloids'].replace(['Yes'],2)
+pheno_file['Keloids']=pheno_file['Keloids'].replace(['No'],1)
+pheno_file.to_csv(f'{folder_where_imgs_will_be_saved}pheno.txt',index=False, sep=' ')
 
 #not that we have merged both dataframes, we are now interested on their ascendency, but due to big ammount
 #of individuals coded as yoruba, we will recode as the toher tribes as 'not yoruba'
@@ -77,10 +89,6 @@ plt.show()
 
 #it's necessary to create a new directory to save the imgs
 
-#in order to place the imgs in the right folder we will need to add a fourth sys.arg
-
-folder_where_imgs_will_be_saved=sys.argv[4]
-print(f'directory where PCA plotts will be allocated: {folder_where_imgs_will_be_saved}')
 
 #1.
 plt.scatter(x=finaldf["PC1"], y=finaldf["PC2"], label="")
