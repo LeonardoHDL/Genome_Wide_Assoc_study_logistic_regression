@@ -1,7 +1,10 @@
 #!/bin/bash
 
-###
+#now that we have done the high ld zones prunning me will continue to do a General QC for an Association 
+#study
 
+### Next lines specify that if no arguments for QC are given, then they'll be set
+#to a default value
 if [ -z "$geno" ];
 then
     geno=0.01
@@ -56,7 +59,9 @@ else
 fi 
 ###
 
-
+#next part it to chek whether the previous step (rhild removal) was made
+#if not, then the input file for QC is the unprocesed data defined in the master script as 'input_file'
+#and not the output from removing_complexes.sh
 output_hild_prunning=${outdirectory}${todays_date}_QC/Removed_complexes/
 
 if [ -d "$output_hild_prunning" ]; then
@@ -65,9 +70,6 @@ else
     echo "hild prunning was not made, input file for for QC is: ${input_file}"
     output_hild_prunning=${input_file}
 fi
-
-#now that we have done the high ld zones prunning me will continue to do a General QC for an Association 
-#study
 
 #in order to maintain an organizd working space we well create a new directory to contain QC output files
 mkdir ${outdirectory}${todays_date}_QC_for_assoc_study
