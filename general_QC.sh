@@ -66,6 +66,7 @@ output_hild_prunning=${outdirectory}${todays_date}_QC/Removed_complexes/
 
 if [ -d "$output_hild_prunning" ]; then
     echo "$output_hild_prunning does exist."
+    output_hild_prunning=${outdirectory}${todays_date}_QC/Removed_complexes/${todays_date}_removed_hild_complexes
 else
     echo "hild prunning was not made, input file for for QC is: ${input_file}"
     output_hild_prunning=${input_file}
