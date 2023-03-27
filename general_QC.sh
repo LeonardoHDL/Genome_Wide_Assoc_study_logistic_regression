@@ -31,6 +31,7 @@ then
 else
     echo "maf set to: ${maf}"
 fi 
+##
 if [ -z "$hwe" ];
 then
     hwe=0.01
@@ -48,10 +49,10 @@ then
 else
     echo "min set to: ${min}"
 fi 
-if [ -z "$geno" ];
 ###
+if [ -z "$geno" ];
 then
-    rel_cutoff=0.01
+    rel_cutoff=0.025
     echo "parameter 'rel_cutoff' or 'r' was not imputed, assigning it to ${rel_cutoff}"
     
 else

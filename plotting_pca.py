@@ -2,6 +2,8 @@ import sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as pltt
+
 
 #we'll beggin by reading the first argument, which will be the eigenvecs file
 
@@ -76,7 +78,7 @@ plt.ylabel('Eigenvalue')
 #with smaller fonts and a bit transparent so I do not cover up data, and make
 #it moveable by the viewer in case upper-right is a bad place for it 
 leg = plt.legend(['eigen values across PCs'], loc='best', borderpad=0.3, 
-                 shadow=False, prop=plt.font_manager.FontProperties(size='large'),
+                 shadow=False, prop=pltt.font_manager.FontProperties(size='large'),
                  markerscale=1)
 leg.get_frame().set_alpha(0.4)
 plt.xticks(range(1, 11, 1))
