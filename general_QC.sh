@@ -7,7 +7,7 @@
 #to a default value
 if [ -z "$geno" ];
 then
-    geno=0.01
+    geno=0.1
     echo "parameter 'geno' or 'g' was not imputed, assigning it to ${geno}"
     
 else
@@ -16,7 +16,7 @@ fi
 ####
 if [ -z "$mind" ];
 then
-    mind=0.01
+    mind=0.1
     echo "parameter 'mind' or 'm' was not imputed, assigning it to ${mind}"
     
 else
@@ -34,7 +34,7 @@ fi
 ##
 if [ -z "$hwe" ];
 then
-    hwe=0.01
+    hwe=0.0000001
     echo "parameter 'hwe' or 'h' was not imputed, assigning it to ${geno}"
     
 else

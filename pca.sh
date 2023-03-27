@@ -22,7 +22,7 @@ output_values_of_PCA=${outdirectory}${todays_date}_PCA/${todays_date}_PCA_values
 echo 'Now performing PCA in the files that we obtained from step 2: general QC'
 echo "we will obtain ${number_of_PCs}" PCs 
 module load plink/1.9
-plink --bfile ${output_file_for_QC} --pca ${num_PCs} --out ${output_values_of_PCA}
+plink --bfile ${input_files_for_PCA} --pca ${num_PCs} --out ${output_values_of_PCA}
 module unload plink/1.9
 
 #Now that we have obtained our values for PCA we will graph them to check for
@@ -36,20 +36,20 @@ module unload plink/1.9
 #3.A file.eigenval with just the 1 column
 #4.The output directory to place png files of PCA and the final covar file
 #which will be used in the Assoc study
-plotting_file_python=${path_to_extrafiles}plotting_pca.py
-eigenvectors_to_plot=${output_values_of_PCA}.eigenvec
-eigenvals_to_plot=${output_values_of_PCA}.eigenval
+plotting_file_python=${outdirectory}plotting_pca.py
+eigenvectors_to_plot=${path_to_extrafiles}pca_value_for_Assoc_estudy.eigenvec
+eigenvals_to_plot=${path_to_extrafiles}pca_value_for_Assoc_estudy.eigenval
 clinical_file=${path_to_extrafiles}clinical.csv
 
 #we well create a new directory to allocate our PCA plotts(this folder in)
-PCA_images__and_files_output_location=${base_path}${todays_date}_PCA/
+PCA_images__and_files_output_location=${outdirectory}${todays_date}_PCA/
 
 
 #Doesn't run python scipt, commented in order to move forward with association Stufy
 
 #Continue to plotting
 module load python38/3.8.3
-python ${plotting_file_python} ${eigenvectors_to_plot} ${eigenvals_to_plot}${clinical_file} ${PCA_images__and_files_output_location}
+python3 ${plotting_file_python} ${eigenvectors_to_plot} ${clinical_file} ${eigenvals_to_plot} ${PCA_images__and_files_output_location}
 module unload python38/3.8.3
 #In the firectory where images were saved it was also saved final covariates file, which will be 
 #saved as 'covarfile.txt' and 'pheno.txt' and they will be placed in the same directiry

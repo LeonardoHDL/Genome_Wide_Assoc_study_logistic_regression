@@ -5,12 +5,12 @@
 #in the outdirectory new folders will be created to place the results of each step of this study
 outdirectory='/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/'
 path_to_extrafiles='/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230227_PCA_results_and_extrafiles/'
-
+export outdirectory
+export path_to_extrafiles
 #Directory where the raw data are stored
 #data must be in .b format.
 input_file=/mnt/Guanina/cvan/data/Keloids_F2/WES/Plink/UCHC_Freeze_Two.GL.splitmulti
-
-
+export input_file
 
 #THis will help us to automatize a little bit more this study
 #not a necessary step, if some arguments are not specified then they'll be set to default
@@ -50,6 +50,6 @@ export todays_date
 ./removing_complexes.sh
 ./general_QC.sh
 ./pca.sh
-./assoc_study.sh
+#./assoc_study.sh
 
 
