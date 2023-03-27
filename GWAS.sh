@@ -50,6 +50,6 @@ export todays_date
 ./removing_complexes.sh
 ./general_QC.sh
 ./pca.sh
-#./assoc_study.sh
+./assoc_study.sh
 
 
