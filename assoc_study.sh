@@ -16,6 +16,12 @@ fi
 
 
 module load plink/1.9
-plink --bfile ${input_for_assoc_study} --logistic --keep-allele-order --pheno ${pheno_file} --pheno-name Keloids --covar ${covarfile} --covar-name PC1-PC10 --allow-no-sex  --out ${output_for_Assoc_study}
+plink --bfile ${input_for_assoc_study} --logistic --keep-allele-order --pheno ${pheno_file} --pheno-name Keloids --covar ${covarfile} --covar-name PC1-PC4 --allow-no-sex  --out ${output_for_Assoc_study}
 module unload plink/1.9
+
+
+
+plink 
 #in or
+#table of critical p's
+#--freq
