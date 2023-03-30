@@ -1,10 +1,10 @@
-args = commandArgs(trailingOnly=TRUE)
-assoc_result_snps<-read.table(args[1], header=TRUE)
-file=args[1]
-print(file)
-assoc_result_snps<-read.table(file, header=TRUE)
-output_for_qq=args[2]
-output_for_man=args[3]
+args <- commandArgs(trailingOnly = TRUE)
+directory <- args[1]
+file_path <- paste(directory, "ADD.txt", sep = "/") # construct the file path
+data <- read.table(file_path, header = TRUE) # read the data from the file
+head(data)
+output_for_qq <- args[2]
+output_for_man <- args[3]
 
 library(lattice)
 manhattan.plot<-function(chr, pos, pvalue, 
@@ -438,9 +438,13 @@ QQ_plot = function(p_values, col=((min(length(p_values), ncol(p_values)))), main
   return( invisible(lambda_values) )
 }
 
-add=read.table('ADD.txt', header = TRUE)
-ps=add$P
-png(file="/home/leonardo/Documents/learning_programming/bash_and_other_languages/QQplot.png",
+p_vals<-data$P
+png(file= output_for_qq,
     width=900, height=600)
-QQplot<-QQ_plot(ps)
+QQplot<-QQ_plot(p_vals)
+dev.off()
+
+png(file=output_for_man,
+    width=900, height=600)
+manhattan.plot(data$CHR, data$BP, data$P, sig.level=5e-8, col=c("orange","blue","purple", "green", "brown"))
 dev.off()
