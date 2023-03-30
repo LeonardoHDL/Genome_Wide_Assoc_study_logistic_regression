@@ -1,6 +1,11 @@
 args <- commandArgs(trailingOnly = TRUE)
 directory <- args[1]
-file_path <- paste(directory, "ADD.txt", sep = "/") # construct the file path
+today <- Sys.Date()
+formatted_date <- format(today, "%Y%m%d")
+file_path <- paste(directory, formatted_date)
+file_path <- paste(file_path, "_results_assoc_study_no_covars.txt")
+
+ # construct the file path
 data <- read.table(file_path, header = TRUE) # read the data from the file
 head(data)
 output_for_qq <- args[2]
