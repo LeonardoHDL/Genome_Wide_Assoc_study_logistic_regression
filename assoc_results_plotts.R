@@ -1,12 +1,9 @@
 args <- commandArgs(trailingOnly = TRUE)
 directory <- args[1]
-today <- Sys.Date()
-formatted_date <- format(today, "%Y%m%d")
-file_path <- paste(directory, formatted_date)
-file_path <- paste(file_path, "_results_assoc_study_no_covars.txt")
+file_path <- paste(directory, "_no_covars.txt", sep = "")
 
  # construct the file path
-data <- read.table(file_path, header = TRUE) # read the data from the file
+data <- read.table(directory, header = TRUE) # read the data from the file
 head(data)
 output_for_qq <- args[2]
 output_for_man <- args[3]
@@ -209,11 +206,6 @@ manhattan.plot<-function(chr, pos, pvalue,
          panel.extra=panel.extra, getgenpos=getGenPos, ...
   );
 }
-dd<-read.table('ADD.txt', header = TRUE)
-png(file="/home/leonardo/Documents/learning_programming/bash_and_other_languages/manhattanplot.png",
-    width=900, height=600)
-manhattan.plot(dd$CHR, dd$BP, dd$P, sig.level=5e-8, col=c("orange","blue","purple", "green", "brown"))
-dev.off()
 #newQQ Plot
 #' QQ plot adapted From Hoffman et al Bioinformatics 2013
 #' QQ plot and lambda_GC optimized for large datasets.
