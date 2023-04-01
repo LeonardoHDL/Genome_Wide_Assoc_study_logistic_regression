@@ -21,7 +21,7 @@ do
 		f) input_file=${OPTARG}
         export input_file ;;	#Rootname of the .ped and .map files
         x) extrafiles=${OPTARG}
-        export extrafiles;; #Extrafiles where: clin file, covar file, pheno file, plott and hid complexes
+        export extrafiles;; # dir to Extrafiles where: clin file, covar file, pheno file, plott and hid complexes
 		g) geno=${OPTARG}
         export geno;;	#Missingness per allele
 		m) mind=${OPTARG}
@@ -32,14 +32,17 @@ do
         export hwe;; #Hardy-Weinberg
 		n) min=${OPTARG}
         export min;;  #Cryptic relatedness
-        r) reel_cutoff=${OPTARG}
-        export reel_cutoff;; #relationship cutoff, cousins=0.025
+        r) rel_cutoff=${OPTARG}
+        export rel_cutoff #relationship cutoff, cousins=0.025
+        ;;
 		o) outdirectory=${OPTARG}
         export outdirectory;; #output directory (not a file), where some new folders will be created
 		p) num_PCs=${OPTARG}
         export  num_PCs;;
     esac
 done
+echo "captured correctly argument rel-cutoff, set to : ${rel_cutoff}"
+
 
 #we define the date so that output files be called with a useful name
 todays_date=$(date +"%Y%m%d")

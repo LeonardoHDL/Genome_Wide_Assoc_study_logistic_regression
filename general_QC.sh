@@ -5,6 +5,7 @@
 
 ### Next lines specify that if no arguments for QC are given, then they'll be set
 #to a default value
+echo $rel_cutoff
 if [ -z "$geno" ];
 then
     geno=0.1
@@ -52,7 +53,7 @@ else
     echo "min set to: ${min}"
 fi 
 ###
-if [ -z "$geno" ];
+if [ -z "$rel_cutoff" ];
 then
     rel_cutoff=0.025
     echo "parameter 'rel_cutoff' or 'r' was not imputed, assigning it to ${rel_cutoff}"
