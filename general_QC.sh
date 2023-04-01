@@ -72,6 +72,9 @@ if [ -d "$output_hild_prunning" ]; then
     output_hild_prunning=${outdirectory}${todays_date}_QC/Removed_complexes/${todays_date}_removed_hild_complexes
 else
     echo "hild prunning was not made, input file for for QC is: ${input_file}"
+    echo "creating folder for QC"
+    mkdir ${outdirectory}${todays_date}_QC
+
     output_hild_prunning=${input_file}
 fi
 
