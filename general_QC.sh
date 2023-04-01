@@ -91,7 +91,7 @@ echo "--Missingness per SNPs set on ${geno}"
 echo "--Missingness per individual set on ${mind}"
 echo "--Minor allele frequency set on ${maf}"
 echo "--Hardy-Weinberg threshold set on ${hwe}"
-echo "--relationship threshold set on ${rel-cutoff}"
+echo "--relationship threshold set on ${rel_cutoff}"
 echo "--setting criptic relatedness treshold on ${min}"
 echo "--keeping allele order"
 
@@ -104,3 +104,6 @@ module unload plink /1.9
 
 echo "results of QC saved in: ${output_file_for_QC}"
 #each result must have its freq
+
+echo "Done with QC, files produced:"
+echo ${output_file_for_QC}

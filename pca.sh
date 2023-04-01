@@ -64,3 +64,6 @@ module unload python38/3.8.3
 #sed  -i '1i FID IID PAT MAT SEX PHENOTYPE' ${output_values_of_PCA}.eigenvec
 
 
+echo "PCA completed"
+
+

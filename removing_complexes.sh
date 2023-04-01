@@ -18,3 +18,6 @@ module load plink/1.9
 plink --bfile ${input_file} --make-set ${reported_high_ld_zones_file} --autosome --write-set  --keep-allele-order --out ${path_to_extrafiles}hild_set
 plink --bfile ${input_file} --exclude ${path_to_extrafiles}hild_set.set --autosome --keep-allele-order --make-bed --out ${output_file_removed_high_ld_regions}
 module unload plink/1.9
+
+echo "Completed the removal of High LD complexes, now performing QC with:"
+echo ${output_file_removed_high_ld_regions}

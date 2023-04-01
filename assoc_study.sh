@@ -45,6 +45,9 @@ module load r/4.2.2
 Rscript --vanilla ${path_R_script} ${results_of_assoc_just_snps} ${output_for_QQ} ${output_for_man}
 module unload r/4.2.2
 
+echo "Assoc study completed, results saved in:"
+echo ${output_for_Assoc_study}
+
 #plink 
 #in or
 #table of critical p's
