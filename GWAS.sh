@@ -41,8 +41,6 @@ do
         export  num_PCs;;
     esac
 done
-echo "captured correctly argument rel-cutoff, set to : ${rel_cutoff}"
-
 
 #we define the date so that output files be called with a useful name
 todays_date=$(date +"%Y%m%d")
@@ -50,10 +48,10 @@ export todays_date
 
 ##comment if you dont want that step to be done
 #only removing_complexes.sh and pca.sh can be commented
-#./removing_complexes.sh
+./removing_complexes.sh
 ./general_QC.sh
-#./pca.sh
-#./assoc_study.sh
+./pca.sh
+./assoc_study.sh
 
 
 
