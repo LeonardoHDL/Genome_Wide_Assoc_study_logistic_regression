@@ -36,7 +36,7 @@ module unload plink/1.9
 #3.A file.eigenval with just the 1 column
 #4.The output directory to place png files of PCA and the final covar file
 #which will be used in the Assoc study
-plotting_file_python=${outdirectory}plotting_pca.py
+plotting_file_python=${path_to_extrafiles}plotting_pca.py
 eigenvectors_to_plot=${path_to_extrafiles}pca_value_for_Assoc_estudy.eigenvec
 eigenvals_to_plot=${path_to_extrafiles}pca_value_for_Assoc_estudy.eigenval
 clinical_file=${path_to_extrafiles}clinical.csv

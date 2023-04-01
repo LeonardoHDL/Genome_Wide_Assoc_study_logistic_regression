@@ -37,7 +37,7 @@ grep ADD  ${output_for_Assoc_study}.assoc.logistic >> ${output_for_Assoc_study}_
 #2.
 #3.
 results_of_assoc_just_snps=${output_for_Assoc_study}
-path_R_script=${outdirectory}assoc_results_plotts.R
+path_R_script=${path_to_extrafiles}assoc_results_plotts.R
 output_for_QQ=${outdirectory}${todays_date}_Assoc_results/${todays_date}_QQplot.png
 output_for_man=${outdirectory}${todays_date}_Assoc_results/${todays_date}_MAN_plot.png
 
