@@ -5,7 +5,6 @@
 
 ### Next lines specify that if no arguments for QC are given, then they'll be set
 #to a default value
-echo $rel_cutoff
 if [ -z "$geno" ];
 then
     geno=0.1
