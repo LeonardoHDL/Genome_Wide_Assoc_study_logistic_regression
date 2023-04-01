@@ -1,8 +1,10 @@
-args <- commandArgs(trailingOnly = TRUE)
-directory <- args[1]
-file_path <- paste(directory, "_no_covars.txt", sep = "")
 
- # construct the file path
+
+#args <- commandArgs(trailingOnly = TRUE)
+#directory <- args[1]
+#file_path <- paste(directory, "_no_covars.txt", sep = "")
+
+# construct the file path
 data <- read.table(directory, header = TRUE) # read the data from the file
 head(data)
 output_for_qq <- args[2]
