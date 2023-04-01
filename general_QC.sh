@@ -76,11 +76,11 @@ else
 fi
 
 #in order to maintain an organizd working space we well create a new directory to contain QC output files
-mkdir ${outdirectory}${todays_date}_QC_for_assoc_study
+mkdir ${outdirectory}${todays_date}_QC/${todays_date}_generalQC
 
 #define input and output directories for QC with plink
 input_for_QC=${output_hild_prunning}
-output_file_for_QC=${outdirectory}${todays_date}_QC_for_assoc_study/${todays_date}_output_from_QC
+output_file_for_QC=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_output_from_QC
 
 
 #print QC threshold values
