@@ -62,7 +62,7 @@ else
 fi 
 ###
 
-#next part it to chek whether the previous step (rhild removal) was made
+#next part it to chek whether the previous step (hild removal) was made
 #if not, then the input file for QC is the unprocesed data defined in the master script as 'input_file'
 #and not the output from removing_complexes.sh
 output_hild_prunning=${outdirectory}${todays_date}_QC/Removed_complexes/
@@ -102,7 +102,7 @@ echo "--keeping allele order"
 module load plink/1.9
 plink --bfile ${input_for_QC} --geno ${geno} --mind ${mind} --genome --min ${min} --autosome --rel-cutoff ${rel_cutoff} --maf ${maf} --hwe ${hwe} --keep-allele-order --make-bed --out ${output_file_for_QC}
 
-plink --bifile ${output_file_for_QC} --freqx --out
+#plink --bifile ${output_file_for_QC} --freqx --out
 module unload plink /1.9
 
 echo "results of QC saved in: ${output_file_for_QC}"
