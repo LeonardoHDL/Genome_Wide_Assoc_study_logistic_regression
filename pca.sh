@@ -15,7 +15,7 @@ else
 fi 
 
 #define input and output directories todo the PCA with plink software
-input_files_for_PCA=${outdirectory}${todays_date}_QC_for_assoc_study/${todays_date}_output_from_QC
+input_files_for_PCA=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_output_from_QC
 output_values_of_PCA=${outdirectory}${todays_date}_PCA/${todays_date}_PCA_values_after_QC
 
 #perform pca
