@@ -58,7 +58,7 @@ then
     echo "parameter 'rel_cutoff' or 'r' was not imputed, assigning it to ${rel_cutoff}"
     
 else
-    echo "rel_cutoff set to: ${rel_cutoff}"
+    echo "rel_cutoff was imputed by user, set to: ${rel_cutoff}"
 fi 
 ###
 
@@ -69,6 +69,7 @@ output_hild_prunning=${outdirectory}${todays_date}_QC/Removed_complexes/
 
 if [ -d "$output_hild_prunning" ]; then
     echo "$output_hild_prunning does exist."
+    echo "already removed high linkage disequilibrium regions, results written in: ${first_output_file_removed_high_ld_regions}"
     output_hild_prunning=${outdirectory}${todays_date}_QC/Removed_complexes/${todays_date}_removed_hild_complexes
 else
     echo "hild prunning was not made, input file for for QC is: ${input_file}"
@@ -87,7 +88,6 @@ output_file_for_QC=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${t
 
 
 #print QC threshold values
-echo "already removed high linkage disequilibrium regions, results written in: ${first_output_file_removed_high_ld_regions}"
 echo "--Running Plink for Quality Control over ${input_for_QC}"
 echo "results of QC will bre written on ${output_file_for_QC}"
 echo "--Missingness per SNPs set on ${geno}"
