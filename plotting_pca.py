@@ -2,6 +2,8 @@ import sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as pltt
+
 
 #we'll beggin by reading the first argument, which will be the eigenvecs file
 
@@ -76,12 +78,11 @@ plt.ylabel('Eigenvalue')
 #with smaller fonts and a bit transparent so I do not cover up data, and make
 #it moveable by the viewer in case upper-right is a bad place for it 
 leg = plt.legend(['eigen values across PCs'], loc='best', borderpad=0.3, 
-                 shadow=False, prop=plt.font_manager.FontProperties(size='large'),
+                 shadow=False, prop=pltt.FontProperties(size='large'),
                  markerscale=1)
 leg.get_frame().set_alpha(0.4)
 plt.xticks(range(1, 11, 1))
 
-plt.show()
 
 #now we we'll create the pca plot
 #we haven't learn how to plot in a for loop so i will create manually 
@@ -90,67 +91,27 @@ plt.show()
 #it's necessary to create a new directory to save the imgs
 
 
-#1.
-plt.scatter(x=finaldf["PC1"], y=finaldf["PC2"], label="")
-for pop in ['Yoruba', 'Not Yoruba' ]:
-    d = finaldf[finaldf['Ethnicity'] == pop]
-    plt.scatter(x=d["PC1"], y=d["PC2"], label=pop)
-plt.legend()
-plt.xlabel(f'PC1')
-plt.ylabel(f'PC2')
-plt.savefig(f'{folder_where_imgs_will_be_saved}PC1vsPC2.png')
+import seaborn as sns
 
-#2.
-plt.scatter(x=finaldf["PC1"], y=finaldf["PC3"], label="")
-for pop in ['Yoruba', 'Not Yoruba' ]:
-    d = finaldf[finaldf['Ethnicity'] == pop]
-    plt.scatter(x=d["PC1"], y=d["PC3"], label=pop)
-plt.legend()
-plt.xlabel(f'PC1')
-plt.ylabel(f'PC3')
-plt.savefig(f'{folder_where_imgs_will_be_saved}PC1vsPC3.png')
+plt.figure(figsize=(18,13))
+plt.subplot(3,3,1)
+sns.scatterplot(data=finaldf, x="PC1", y="PC2", hue="Ethnicity",palette=['orange', 'green'])
 
-#3.
-plt.scatter(x=finaldf["PC1"], y=finaldf["PC4"], label="")
-for pop in ['Yoruba', 'Not Yoruba' ]:
-    d = finaldf[finaldf['Ethnicity'] == pop]
-    plt.scatter(x=d["PC1"], y=d["PC4"], label=pop)
-plt.legend()
-plt.xlabel(f'PC1')
-plt.ylabel(f'PC4')
-plt.savefig(f'{folder_where_imgs_will_be_saved}PC1vsPC4.png')
+plt.subplot(3,3,2)
+sns.scatterplot(data=finaldf, x="PC1", y="PC3", hue="Ethnicity", palette=['orange', 'green'])
 
-#4.
-plt.scatter(x=finaldf["PC2"], y=finaldf["PC3"], label="")
-for pop in ['Yoruba', 'Not Yoruba' ]:
-    d = finaldf[finaldf['Ethnicity'] == pop]
-    plt.scatter(x=d["PC2"], y=d["PC3"], label=pop)
-plt.legend()
-plt.xlabel(f'PC2')
-plt.ylabel(f'PC3')
-plt.savefig(f'{folder_where_imgs_will_be_saved}PC2vsPC3.png')
+plt.subplot(3,3,3)
+sns.scatterplot(data=finaldf, x="PC1", y="PC4", hue="Ethnicity", palette=['orange', 'green'])
 
-#5.
-plt.scatter(x=finaldf["PC2"], y=finaldf["PC4"], label="")
-for pop in ['Yoruba', 'Not Yoruba' ]:
-    d = finaldf[finaldf['Ethnicity'] == pop]
-    plt.scatter(x=d["PC2"], y=d["PC4"], label=pop)
-plt.legend()
-plt.xlabel(f'PC2')
-plt.ylabel(f'PC4')
-plt.savefig(f'{folder_where_imgs_will_be_saved}PC2vsPC4.png')
+plt.subplot(3,3,4)
+sns.scatterplot(data=finaldf, x="PC2", y="PC3", hue="Ethnicity", palette=['orange', 'green'])
 
-#6.
-plt.scatter(x=finaldf["PC3"], y=finaldf["PC4"], label="")
-for pop in ['Yoruba', 'Not Yoruba' ]:
-    d = finaldf[finaldf['Ethnicity'] == pop]
-    plt.scatter(x=d["PC3"], y=d["PC4"], label=pop)
-plt.legend()
-plt.xlabel(f'PC3')
-plt.ylabel(f'PC4')
-plt.savefig(f'{folder_where_imgs_will_be_saved}PC3vsPC4.png')
+plt.subplot(3,3,5)
+sns.scatterplot(data=finaldf, x="PC2", y="PC4", hue="Ethnicity", palette=['orange', 'green'])
 
+plt.subplot(3,3,6)
+sns.scatterplot(data=finaldf, x="PC3", y="PC4", hue="Ethnicity", palette=['orange', 'green'])
 
-
+plt.savefig(f'{folder_where_imgs_will_be_saved}/list_of_pcs.png')
 
 
