@@ -85,7 +85,7 @@ mkdir ${outdirectory}${todays_date}_QC/${todays_date}_generalQC
 #define input and output directories for QC with plink
 input_for_QC=${output_hild_prunning}
 output_file_for_QC=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_output_from_QC
-
+output_for_freq_count=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report
 
 #print QC threshold values
 echo "--Running Plink for Quality Control over ${input_for_QC}"
@@ -101,8 +101,7 @@ echo "--keeping allele order"
 #perform QC with plink
 module load plink/1.9
 plink --bfile ${input_for_QC} --geno ${geno} --mind ${mind} --genome --min ${min} --autosome --rel-cutoff ${rel_cutoff} --maf ${maf} --hwe ${hwe} --keep-allele-order --make-bed --out ${output_file_for_QC}
-
-#plink --bifile ${output_file_for_QC} --freqx --out
+plink --bifile ${output_file_for_QC} --freqx --out ${output_for_freq_count}
 module unload plink /1.9
 
 echo "results of QC saved in: ${output_file_for_QC}"
