@@ -52,3 +52,25 @@ echo ${output_for_Assoc_study}
 #in or
 #table of critical p's
 #--freq
+#one of the final steps is to create a file where statistically significant snps are written together 
+#with their MAF count (obtained from general QC script).
+
+#in order to do that we must create a couple of files where values from
+#the snps MAFs will be sorted, so as the result values from assoc_study
+file_for_critical_p_vals=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_critical_P_values.txt
+p_val_treshold=0.0000001
+output_for_freq_count=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report.freq
+results_logistic_no_covars=${output_for_Assoc_study}_no_covars.txt
+sorted_pvals=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_critical_P_values_sorted.txt
+sorted_freq_file=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report_sorted.txt
+file_with_critcal_snps_and_freqs=${outdirectory}${todays_date}_Assoc_results/${todays_date}_significant_snps_with_freq.txt
+
+#we first obtain snps which p val was statistically significant: <=0.0000001
+awk -v num="$p_val_treshold" 'NR == 1 || $"'P'" <= num {print}' ${results_logistic_no_covars} > ${file_for_critical_p_vals}
+#then we have to sort the column that we are gonna use to join both files
+#in this case is the SNP column in both files
+sort -t '\t' -k SNP  ${file_for_critical_p_vals} > ${sorted_pvals}
+sort -t '\t' -k SNP  ${output_for_freq_count} > ${sorted_freq_file}
+#we then use the command join '-1 and -2' specify which should be the common column
+join -t '\t' -1 SNP -2 SNP ${sorted_pvals} ${sorted_freq_file} > ${file_with_critcal_snps_and_freqs}
+
