@@ -52,7 +52,4 @@ export todays_date
 ./general_QC.sh
 ./pca.sh
 ./assoc_study.sh
-
-
-
 #nohup
