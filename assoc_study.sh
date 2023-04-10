@@ -59,7 +59,7 @@ echo ${output_for_Assoc_study}
 #the snps MAFs will be sorted, so as the result values from assoc_study
 file_for_critical_p_vals=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_critical_P_values.txt
 p_val_treshold=0.0000001
-output_for_freq_count=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report.freq
+output_for_freq_count=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report.frqx
 results_logistic_no_covars=${output_for_Assoc_study}_no_covars.txt
 sorted_pvals=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_critical_P_values_sorted.txt
 sorted_freq_file=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report_sorted.txt
@@ -69,8 +69,8 @@ file_with_critcal_snps_and_freqs=${outdirectory}${todays_date}_Assoc_results/${t
 awk -v num="$p_val_treshold" 'NR == 1 || $"'P'" <= num {print}' ${results_logistic_no_covars} > ${file_for_critical_p_vals}
 #then we have to sort the column that we are gonna use to join both files
 #in this case is the SNP column in both files
-sort -t '\t' -k SNP  ${file_for_critical_p_vals} > ${sorted_pvals}
-sort -t '\t' -k SNP  ${output_for_freq_count} > ${sorted_freq_file}
+sort -t '\\t' -k 2  ${file_for_critical_p_vals} > ${sorted_pvals}
+sort -t '\\t' -k 2  ${output_for_freq_count} > ${sorted_freq_file}
 #we then use the command join '-1 and -2' specify which should be the common column
-join -t '\t' -1 SNP -2 SNP ${sorted_pvals} ${sorted_freq_file} > ${file_with_critcal_snps_and_freqs}
+join -t '\\t' -1 2 -2 2 ${sorted_pvals} ${sorted_freq_file} > ${file_with_critcal_snps_and_freqs}
 
