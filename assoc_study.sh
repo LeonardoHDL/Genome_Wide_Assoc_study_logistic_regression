@@ -15,9 +15,10 @@ else
 fi
 
 
-module load plink/1.9
-plink --bfile ${input_for_assoc_study} --logistic --keep-allele-order --pheno ${pheno_file} --pheno-name Keloids --covar ${covarfile} --covar-name PC1-PC4 --allow-no-sex  --out ${output_for_Assoc_study}
-module unload plink/1.9
+#module load plink/1.9
+#plink --bfile ${input_for_assoc_study} --logistic --keep-allele-order --pheno ${pheno_file} --pheno-name Keloids --covar ${covarfile} --covar-name PC1-PC4 --allow-no-sex  --out ${output_for_Assoc_study}
+#module unload plink/1.9
+
 #after we have completed the assoc study, the result will be a file with form:
 #file.assoc.logistic
 #this file contains  all the result from the assoc study, but we don't need all
@@ -58,7 +59,6 @@ echo ${output_for_Assoc_study}
 #in order to do that we must create a couple of files where values from
 #the snps MAFs will be sorted, so as the result values from assoc_study
 file_for_critical_p_vals=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_critical_P_values.txt
-p_val_treshold=0.0000001
 output_for_freq_count=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report.frqx
 results_logistic_no_covars=${output_for_Assoc_study}_no_covars.txt
 sorted_pvals=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_critical_P_values_sorted.txt
@@ -66,11 +66,24 @@ sorted_freq_file=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${tod
 file_with_critcal_snps_and_freqs=${outdirectory}${todays_date}_Assoc_results/${todays_date}_significant_snps_with_freq.txt
 
 #we first obtain snps which p val was statistically significant: <=0.0000001
-awk -v num="$p_val_treshold" 'NR == 1 || $"'P'" <= num {print}' ${results_logistic_no_covars} > ${file_for_critical_p_vals}
+#awk -v num="$0.0000001" 'NR == 1 || $"'P'" <= num {print}' ${results_logistic_no_covars} > ${file_for_critical_p_vals}
+
+awk '$9 <= 0.0000001' ${results_logistic_no_covars} > ${file_for_critical_p_vals}
+
+
 #then we have to sort the column that we are gonna use to join both files
 #in this case is the SNP column in both files
-sort -t '\\t' -k 2  ${file_for_critical_p_vals} > ${sorted_pvals}
-sort -t '\\t' -k 2  ${output_for_freq_count} > ${sorted_freq_file}
+#sort -t '\\t' -k 2  ${file_for_critical_p_vals} > ${sorted_pvals}
+#sort -t '\\t' -k 2  ${output_for_freq_count} > ${sorted_freq_file}
 #we then use the command join '-1 and -2' specify which should be the common column
-join -t '\\t' -1 2 -2 2 ${sorted_pvals} ${sorted_freq_file} > ${file_with_critcal_snps_and_freqs}
+sorted_pvals=${outdirectory}${todays_date}_Assoc_results/${todays_date}_sorted_pvals.txt
+sorted_freq_file=${outdirectory}${todays_date}_Assoc_results/${todays_date}_sorted_freq_file.txt
+sort -k2 ${file_for_critical_p_vals} > ${sorted_pvals}
+header_pvals=$(head -n 1 ${results_logistic_no_covars}) 
+header_freq=$(head -n 1 ${sorted_freq_file})
 
+#sort -k2 ${output_for_freq_count} > ${sorted_freq_file}
+sort -t $'\t' -k2,2 -s "${output_for_freq_count}" > "${sorted_freq_file}"
+
+join -1 2 -2 2 ${sorted_pvals} ${sorted_freq_file} > ${file_with_critcal_snps_and_freqs}
+sed -i "1i$header_pvals\t $header_freq" ${file_with_critcal_snps_and_freqs}
