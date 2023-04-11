@@ -101,7 +101,7 @@ echo "--keeping allele order"
 #perform QC with plink
 module load plink/1.9
 plink --bfile ${input_for_QC} --geno ${geno} --mind ${mind} --genome --min ${min} --autosome --rel-cutoff ${rel_cutoff} --maf ${maf} --hwe ${hwe} --keep-allele-order --make-bed --out ${output_file_for_QC}
-plink --bifile ${output_file_for_QC} --freqx --keep-allele-order --out ${output_for_freq_count}
+plink --bfile ${output_file_for_QC} --freqx --keep-allele-order --out ${output_for_freq_count}
 module unload plink /1.9
 
 echo "results of QC saved in: ${output_file_for_QC}"
