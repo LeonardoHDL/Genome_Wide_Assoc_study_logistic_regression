@@ -64,7 +64,7 @@ results_logistic_no_covars=${output_for_Assoc_study}_no_covars.txt
 sorted_pvals=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_critical_P_values_sorted.txt
 sorted_freq_file=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report_sorted.txt
 file_with_critcal_snps_and_freqs=${outdirectory}${todays_date}_Assoc_results/${todays_date}_significant_snps_with_freq.txt
-
+file_for_header=${outdirectory}${todays_date}_Assoc_results/${todays_date}_header.txt
 #we first obtain snps which p val was statistically significant: <=0.0000001
 #awk -v num="$0.0000001" 'NR == 1 || $"'P'" <= num {print}' ${results_logistic_no_covars} > ${file_for_critical_p_vals}
 
@@ -76,14 +76,20 @@ awk '$9 <= 0.0000001' ${results_logistic_no_covars} > ${file_for_critical_p_vals
 #sort -t '\\t' -k 2  ${file_for_critical_p_vals} > ${sorted_pvals}
 #sort -t '\\t' -k 2  ${output_for_freq_count} > ${sorted_freq_file}
 #we then use the command join '-1 and -2' specify which should be the common column
-sorted_pvals=${outdirectory}${todays_date}_Assoc_results/${todays_date}_sorted_pvals.txt
-sorted_freq_file=${outdirectory}${todays_date}_Assoc_results/${todays_date}_sorted_freq_file.txt
+
+#sorted_pvals=${outdirectory}${todays_date}_Assoc_results/${todays_date}_sorted_pvals.txt
+#sorted_freq_file=${outdirectory}${todays_date}_Assoc_results/${todays_date}_sorted_freq_file.txt
+
 sort -k2 ${file_for_critical_p_vals} > ${sorted_pvals}
 header_pvals=$(head -n 1 ${results_logistic_no_covars}) 
-header_freq=$(head -n 1 ${sorted_freq_file})
 
 #sort -k2 ${output_for_freq_count} > ${sorted_freq_file}
 sort -t $'\t' -k2,2 -s "${output_for_freq_count}" > "${sorted_freq_file}"
+header_freq=$(head -n 1 ${output_for_freq_count})
 
 join -1 2 -2 2 ${sorted_pvals} ${sorted_freq_file} > ${file_with_critcal_snps_and_freqs}
-sed -i "1i$header_pvals\t $header_freq" ${file_with_critcal_snps_and_freqs}
+sed -i "1i$header_pvals $header_freq" ${file_with_critcal_snps_and_freqs}
+head -n 1 ${file_with_critcal_snps_and_freqs}| tr -s '[:blank:]' ' ' > ${file_for_header}
+header_with_one_space=$(head -n 1 ${file_for_header})
+sed -i "1s/.*/$header_with_one_space/" ${file_with_critcal_snps_and_freqs}
+rm ${file_for_header}
