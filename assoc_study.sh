@@ -15,9 +15,9 @@ else
 fi
 
 
-#module load plink/1.9
-#plink --bfile ${input_for_assoc_study} --logistic --keep-allele-order --pheno ${pheno_file} --pheno-name Keloids --covar ${covarfile} --covar-name PC1-PC4 --allow-no-sex  --out ${output_for_Assoc_study}
-#module unload plink/1.9
+module load plink/1.9
+plink --bfile ${input_for_assoc_study} --logistic --keep-allele-order --pheno ${pheno_file} --pheno-name Keloids --covar ${covarfile} --covar-name PC1-PC4 --allow-no-sex  --out ${output_for_Assoc_study}
+module unload plink/1.9
 
 #after we have completed the assoc study, the result will be a file with form:
 #file.assoc.logistic
@@ -87,9 +87,10 @@ header_pvals=$(head -n 1 ${results_logistic_no_covars})
 sort -t $'\t' -k2,2 -s "${output_for_freq_count}" > "${sorted_freq_file}"
 header_freq=$(head -n 1 ${output_for_freq_count})
 
-join -1 2 -2 2 ${sorted_pvals} ${sorted_freq_file} > ${file_with_critcal_snps_and_freqs}
-sed -i "1i$header_pvals $header_freq" ${file_with_critcal_snps_and_freqs}
-head -n 1 ${file_with_critcal_snps_and_freqs}| tr -s '[:blank:]' ' ' > ${file_for_header}
-header_with_one_space=$(head -n 1 ${file_for_header})
-sed -i "1s/.*/$header_with_one_space/" ${file_with_critcal_snps_and_freqs}
-rm ${file_for_header}
+join -1 2 -2 2 ${sorted_pvals} ${sorted_freq_file} -o '1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.5,2.6,2.7,2.8,2.9,2.10'> ${file_with_critcal_snps_and_freqs}
+#sed -i "1i$header_pvals $header_freq" ${file_with_critcal_snps_and_freqs}
+#head -n 1 ${file_with_critcal_snps_and_freqs}| tr -s '[:blank:]' ' ' > ${file_for_header}
+#header_with_one_space=$(head -n 1 ${file_for_header})
+header="SNP CHR BP A1 TEST NMISS OR STAT P C(HOMA1) C(HET) C(HOMA2) C(HAPA1) C(HAPA2) C(MISSING)"
+sed -i "1s/.*/$header/" ${file_with_critcal_snps_and_freqs}
+#rm ${file_for_header}
