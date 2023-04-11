@@ -48,8 +48,8 @@ export todays_date
 
 ##comment if you dont want that step to be done
 #only removing_complexes.sh and pca.sh can be commented
-./removing_complexes.sh
-./general_QC.sh
-./pca.sh
+#./removing_complexes.sh
+#./general_QC.sh
+#./pca.sh
 ./assoc_study.sh
 #nohup
