@@ -18,7 +18,7 @@ export input_file
 while getopts i:x:g:m:a:h:n:r:o:p flag
 do
     case "${flag}" in
-		f) input_file=${OPTARG}
+		i) input_file=${OPTARG}
         export input_file ;;	#Rootname of the .ped and .map files
         x) extrafiles=${OPTARG}
         export extrafiles;; # dir to Extrafiles where: clin file, covar file, pheno file, plott and hid complexes

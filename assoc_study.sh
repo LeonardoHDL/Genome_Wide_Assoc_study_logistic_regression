@@ -10,7 +10,7 @@ if [ -d "$output_values_of_PCA" ]; then
     pheno_file=${outdirectory}${todays_date}_PCA/pheno.txt
 else
     echo "PCA script was not run, input fies for covars and extrafiles are in: ${path_to_extrafiles}"
-    covarfile=${path_to_extrafiles}phenos_last.txt
+    covarfile=${path_to_extrafiles}covarfile.txt
     pheno_file=${path_to_extrafiles}phenos_last.txt
 fi
 

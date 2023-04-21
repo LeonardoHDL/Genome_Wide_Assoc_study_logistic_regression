@@ -111,5 +111,3 @@ echo "Done with QC, files produced:"
 echo ${output_file_for_QC}
 echo "A separate file containing the MAF count of each snp is writed in:"
 echo ${output_for_freq_count}
-
-echo "hola"
