@@ -5,7 +5,7 @@
 mkdir ${outdirectory}${todays_date}_Assoc_results
 
 #we will use the output of the QC step as input for the assoc study
-input_for_assoc_study=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_output_from_QC
+input_for_assoc_study=${outdirectory}${todays_date}_QC_for_Assoc_study/QC_for_Assoc_study
 output_for_Assoc_study=${outdirectory}${todays_date}_Assoc_results/${todays_date}_results_assoc_study
 output_values_of_PCA=${outdirectory}${todays_date}_PCA/ #to be used as covar file
 
@@ -67,10 +67,10 @@ echo "manhattan and QQ plots created, they are in: ${outdirectory}${todays_date}
 
 echo "obtain statistically significant snps and their freqs"
 file_for_critical_p_vals=${outdirectory}${todays_date}_Assoc_results/${todays_date}_critical_P_values.txt
-output_for_freq_count=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report.frqx
+output_for_freq_count=${outdirectory}${todays_date}_QC_for_Assoc_study/${todays_date}_freq_report.frqx
 results_logistic_no_covars=${output_for_Assoc_study}_no_covars.txt
 sorted_pvals=${outdirectory}${todays_date}_Assoc_results/${todays_date}_critical_P_values_sorted.txt
-sorted_freq_file=${outdirectory}${todays_date}_QC/${todays_date}_generalQC/${todays_date}_freq_report_sorted.txt
+sorted_freq_file=${outdirectory}${todays_date}_QC_for_Assoc_study/${todays_date}_freq_report_sorted.txt
 file_with_critcal_snps_and_freqs=${outdirectory}${todays_date}_Assoc_results/${todays_date}_significant_snps_with_freq.txt
 
 echo "setting the critical p value to 0.0000001"

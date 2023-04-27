@@ -18,11 +18,11 @@ else
 fi 
 
 #define input and output directories todo the PCA with plink software
-input_files_for_PCA=${outdirectory}${todays_date}_QC/${todays_date}_LD_pruning_for_pca/${todays_date}_output_from_LD_pruning
+input_files_for_PCA=${outdirectory}${todays_date}_QC_for_pca/${todays_date}_LD_pruning_for_pca/${todays_date}_output_from_LD_pruning
 output_values_of_PCA=${outdirectory}${todays_date}_PCA/${todays_date}_PCA_values_after_QC
 
 #perform pca
-echo 'Now performing PCA in the files that we obtained from step 2: general QC'
+echo 'Now performing PCA in the files that we obtained from step 3: output_from_LD_pruning'
 echo "we will obtain 10 PCs from plink software"
 echo "input file for PCA are: ${input_files_for_PCA}"
 module load plink/1.9

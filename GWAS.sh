@@ -19,7 +19,7 @@ outdirectory='/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_a
 #these must be named as follows: eigenvec file must be named as: covarfile.txt, and pheno file must be named as: pheno.txt
 path_to_extrafiles='/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230227_PCA_results_and_extrafiles/'
 
-
+#
 export outdirectory
 export path_to_extrafiles
 #Directory where the raw data are stored
@@ -60,17 +60,15 @@ done
 #we define the date so that output files be called with a useful name
 todays_date=$(date +"%Y%m%d")
 export todays_date
-script ${outdirectory}
 echo "directory to be used as output: ${outdirectory}"
 echo "directory to extrafiles: ${path_to_extrafiles}"
 echo "input file: ${input_file}"
 
 ##comment if you dont want that step to be done
 #only removing_complexes.sh, pca.sh, and LD prunning can be commented, the others are necessary
-./removing_complexes.sh
-./general_QC.sh
-./removing_LD_for_pca.sh
-./pca.sh
-./assoc_study.sh
-#nohup
-exit 
+./removing_complexes.sh #this script remove regions that may affect PCA values and the association study
+./QC_for_PCA.sh #this script is meant to do a QC for the PCA step
+./removing_LD_for_pca.sh #this script is meant to remove LD regions for the PCA step
+./pca.sh #this script is meant to do a PCA
+./QC_for_Assoc_study.sh #this script is meant to do a QC for the association study
+./assoc_study.sh #this script is meant to do an association study
