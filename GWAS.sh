@@ -6,7 +6,7 @@
 #parameters are not mandatory, if not specified then they'll be set to default values
 
 #in the outdirectory new folders will be created to place the results of each step of this study
-outdirectory='/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/'
+outdirectory='/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230501_playing_mafs/maf_0.01_pca_and_assoc/'
 
 #it is import to note that this directory is where the extrafiles are stored, these extrafiles are:
 #covar file, pheno file, clin file, plott files to obtain Manhattan, QQ and PCA
@@ -66,9 +66,9 @@ echo "input file: ${input_file}"
 
 ##comment if you dont want that step to be done
 #only removing_complexes.sh, pca.sh, and LD prunning can be commented, the others are necessary
-./removing_complexes.sh #this script remove regions that may affect PCA values and the association study
-./QC_for_PCA.sh #this script is meant to do a QC for the PCA step
-./removing_LD_for_pca.sh #this script is meant to remove LD regions for the PCA step
-./pca.sh #this script is meant to do a PCA
-./QC_for_Assoc_study.sh #this script is meant to do a QC for the association study
-./assoc_study.sh #this script is meant to do an association study
+/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/removing_complexes.sh #this script remove regions that may affect PCA values and the association study
+/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/QC_for_PCA.sh #this script is meant to do a QC for the PCA step
+/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/removing_LD_for_pca.sh #this script is meant to remove LD regions for the PCA step
+/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/pca.sh #this script is meant to do a PCA
+/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/QC_for_Assoc_study.sh #this script is meant to do a QC for the association study
+/mnt/Guanina/cvan/data/Keloids_F2/Analysis/leo_analysis/20230310_automatizing_scripts_and_trials/assoc_study.sh #this script is meant to do an association study
