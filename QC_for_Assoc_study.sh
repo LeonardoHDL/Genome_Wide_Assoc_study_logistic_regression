@@ -77,7 +77,7 @@ echo "results of QC will be written to ${output}"
 
 
 module load plink/1.9
-plink --bfile ${input} --geno ${geno} --mind ${mind} --genome --autosome --keep-allele-order --rel-cutoff ${rel_cutoff} --maf ${maf} --hwe ${hwe} --make-bed --out ${output}
+plink --bfile ${input} --geno ${geno} --mind ${mind} --genome --autosome --keep-allele-order --rel-cutoff ${rel_cutoff} --maf ${maf} --hwe ${hwe} --min ${min} --make-bed --out ${output}
 plink --bfile ${output} --freqx --keep-allele-order --out ${output_for_freq_count}
 module unload plink/1.9
 
