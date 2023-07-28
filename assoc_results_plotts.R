@@ -2,7 +2,7 @@
 
 args <- commandArgs(trailingOnly = TRUE)
 directory <- args[1]
-file_path <- paste(directory, "_no_covars.txt", sep = "")
+file_path <- paste(directory, ".assoc.logistic", sep = "")
 
 # construct the file path
 data <- read.table(file_path, header = TRUE) # read the data from the file
