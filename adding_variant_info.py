@@ -25,11 +25,16 @@ VCF=read_vcf(VCF_path)
 
 #we split the info column
 info_column_splitted=VCF['INFO'].str.split("(", expand=True)
+#due to an expected error we will select only the first two cols
+info_column_splitted=info_column_splitted.loc[:,0:1]
 #we join the splitted info column with the rest of the vcf
 joint_variants_and_info=VCF.join(info_column_splitted)
 #delete the info column since we have splitted it and the original info column is not needed anymore
 joint_variants_and_info.drop(columns=['INFO'], inplace=True)
 #define the new column names
+print(joint_variants_and_info.columns)
+print(joint_variants_and_info.head())
+print(joint_variants_and_info.shape)
 new_cols_name=['CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'rep=', 'INFO']
 joint_variants_and_info.columns=new_cols_name
 #now we split the info column again
@@ -53,7 +58,7 @@ variants_with_info['SNP']=variants_with_info['CHROM'].astype(str)+':'+variants_w
 
 #now we will read the output from plink that contains the results of the logistic regression
 results_logistic_regression_path=sys.argv[2]
-results_logistic_regression=pd.read_table('results_logistic_regression_path', sep='\s+')
+results_logistic_regression=pd.read_table(results_logistic_regression_path, sep='\s+')
 #no we will merge the results with the variant info
 merged_results_w_variant_info=pd.merge(variants_with_info, results_logistic_regression, on='SNP', how='inner')
 #we will select only the columns that we need
