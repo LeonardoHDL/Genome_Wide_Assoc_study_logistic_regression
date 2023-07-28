@@ -5,7 +5,7 @@
 ### Next lines specify the parameters to be used in the QC for PCA
 geno=0.1
 mind=0.1
-maf=0.005
+maf=0.01
 hwe=0.0000001
 min=0.2
 rel_cutoff=0.025
