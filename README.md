@@ -2,7 +2,7 @@
 This repository contains the necessary scripts to perform a genome wide association study using logistic regression. 
 It's to note that user only has to run the GWAS.sh script, which will call the other scripts.  
 It should be run in the following way:  
-./GWAS.sh
+./GWAS.sh  
 User can also pass to the script the following arguments (that will define new variables and values to be used throughout the analysis):  
 -------args for GWAS.sh script-------  
 -o outdirectory -> inside this directory the results will be stored in separate folders, the results will be allocated  automatically in the corresponding folder
