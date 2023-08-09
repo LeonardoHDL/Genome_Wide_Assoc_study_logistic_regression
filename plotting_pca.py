@@ -113,5 +113,3 @@ plt.subplot(3,3,6)
 sns.scatterplot(data=finaldf, x="PC3", y="PC4", hue="Ethnicity", palette=['orange', 'green'])
 
 plt.savefig(f'{folder_where_imgs_will_be_saved}/list_of_pcs.png')
-
-
