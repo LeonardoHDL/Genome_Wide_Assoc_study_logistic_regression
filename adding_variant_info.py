@@ -60,7 +60,7 @@ variants_with_info['SNP']=variants_with_info['CHROM'].astype(str)+':'+variants_w
 results_logistic_regression_path=sys.argv[2]
 results_logistic_regression=pd.read_table(results_logistic_regression_path, sep='\s+')
 #no we will merge the results with the variant info
-merged_results_w_variant_info=pd.merge(variants_with_info, results_logistic_regression, on='SNP', how='inner')
+merged_results_w_variant_info=pd.merge(variants_with_info, results_logistic_regression, on='SNP', how='right')
 #we will select only the columns that we need
 merged_results_w_variant_info=merged_results_w_variant_info[['CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'Effect',
        'IsLof', 'IsAncestralAllele', 'DeleteriousMissenseCount', 'GeneName',
@@ -89,7 +89,13 @@ path_to_store=sys.argv[4]
 variantInfo_results_and_freqx_merged.to_csv(path_to_store, index=False)
 
 #now we will select only those values that are significant
-significant_variants=variantInfo_results_and_freqx_merged[variantInfo_results_and_freqx_merged['P']<0.0000006]
+significant_variants=variantInfo_results_and_freqx_merged[variantInfo_results_and_freqx_merged['P']<0.0000005]
 #we will store this in a csv
 significant_variants_path=sys.argv[5]
 significant_variants.to_csv(significant_variants_path, index=False)
+
+#we will also get the top ten most significant variants
+topten=variantInfo_results_and_freqx_merged.nsmallest(10, 'P')
+#we will store this in a csv
+topten_path=sys.argv[6]
+topten.to_csv(topten_path, index=False)
