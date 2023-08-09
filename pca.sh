@@ -75,5 +75,3 @@ echo "PCA images were created in ${PCA_images__and_files_output_location}"
 
 
 echo "PCA completed"
-
-
