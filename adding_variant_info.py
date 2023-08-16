@@ -52,8 +52,24 @@ info_fields.columns=names_of_info_fields
 variants_with_info=joint_variants_and_info.join(info_fields)
 #now we delete the old info field
 variants_with_info.drop(columns=['INFO'], inplace=True)
-#we later will have to merge this by using CHR:POS:REF:ALT
+#since indels doesn't work when merging dataframes, we will create a special dataframe for indels
+variants_with_info['Numeric_Difference'] = variants_with_info['REF'].apply(len) - variants_with_info['ALT'].apply(len)
+#we select only the indels indicated by the numeric difference
+variants_with_info_just_indels=variants_with_info[variants_with_info['Numeric_Difference']!=0]
+#we later will have to merge this by using CHR:POS:REF:ALT,this is the original dataframe
 variants_with_info['SNP']=variants_with_info['CHROM'].astype(str)+':'+variants_with_info['POS'].astype(str)+':'+variants_with_info['REF'].astype(str)+':'+variants_with_info['ALT'].astype(str)
+#now we will create a column that will have a letter depending on the sign of the numeric difference
+variants_with_info_just_indels['type_of_indel']=variants_with_info_just_indels['Numeric_Difference'].apply(lambda x: 'D' if x>0 else 'I')
+#now we will create a column that will have the corrected SNP
+variants_with_info_just_indels['SNP_corrected']=variants_with_info_just_indels['CHROM'].astype(str)+':'+variants_with_info_just_indels['POS'].astype(str)+':'+variants_with_info_just_indels['type_of_indel'].astype(str)+':'+variants_with_info_just_indels['Numeric_Difference'].abs().astype(str)
+#now we will create the SNP column even if it iswrong, but it will be necessary for merging
+variants_with_info_just_indels['SNP']=variants_with_info_just_indels['CHROM'].astype(str)+':'+variants_with_info_just_indels['POS'].astype(str)+':'+variants_with_info_just_indels['REF'].astype(str)+':'+variants_with_info_just_indels['ALT'].astype(str)
+#select only columns of interest
+variants_with_info_just_indels_just_2columns=variants_with_info_just_indels[['SNP_corrected','SNP']]
+#merge the both dataframes, where one of them contain the right SNP identifier
+all_types_of_variants=pd.merge(variants_with_info,variants_with_info_just_indels_just_2columns,on='SNP',how='left')
+#now we will replace the wrong SNP identifier with the right one
+all_types_of_variants.loc[all_types_of_variants['Numeric_Difference'] != 0, 'SNP'] =all_types_of_variants.loc[all_types_of_variants['Numeric_Difference'] != 0, 'SNP_corrected']
 
 
 #now we will read the output from plink that contains the results of the logistic regression
